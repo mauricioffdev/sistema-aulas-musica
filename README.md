@@ -5,7 +5,7 @@ O projeto implementa um CRUD completo com relacionamento entre entidades e valid
 
 ## 🚀 Tecnologias Utilizadas
 
-* **Back-end:** Java 17, Spring Boot 3
+* **Back-end:** Java 25, Spring Boot 3
 * **Banco de Dados:** MySQL, Spring Data JPA, Hibernate
 * **Front-end:** Thymeleaf (Server-side rendering), Bootstrap 5
 * **Ferramentas:** Maven, IntelliJ IDEA
@@ -24,23 +24,36 @@ O projeto implementa um CRUD completo com relacionamento entre entidades e valid
 * **Visualização de Status:** Etiquetas (Badges) dinâmicas para status "PAGO" (Verde) ou "PENDENTE" (Amarelo).
 * **Dropdown Dinâmico:** Seleção de alunos carregada diretamente do banco de dados na tela de pagamento.
 
-## 📸 Como rodar o projeto
+---
 
+## 🛠️ Configuração e Execução Local
+
+### 1. Variáveis de Ambiente
+Por questões de segurança, as credenciais sensíveis do banco de dados não estão fixas no código. Você precisará configurar a seguinte variável de ambiente no seu sistema operacional:
+
+* **`DB_PASSWORD`**: Senha do seu banco de dados MySQL local.
+
+> **Dica:** No Windows, configure em "Variáveis de Ambiente do Sistema". Lembre-se de reiniciar sua IDE após configurar para que ela reconheça a nova variável.
+
+### 2. Clonagem e Banco de Dados
 1.  Clone o repositório:
     ```bash
-    git clone https://github.com/mauricioffdev/sistema-aulas-musica.git
+    git clone [https://github.com/mauricioffdev/sistema-aulas-musica.git](https://github.com/mauricioffdev/sistema-aulas-musica.git)
     ```
-2.  Configure o banco de dados MySQL no arquivo `application.properties`:
+2.  O projeto utiliza o arquivo `src/main/resources/application.properties` configurado para ler a senha via variável de ambiente:
     ```properties
     spring.datasource.url=jdbc:mysql://localhost:3306/sistema_aulas
-    spring.datasource.username=seu_usuario
-    spring.datasource.password=sua_senha
+    spring.datasource.username=root
+    spring.datasource.password=${DB_PASSWORD}
     ```
-3.  Execute o projeto via IntelliJ ou Maven:
-    ```bash
-    mvn spring-boot:run
-    ```
-4.  Acesse no navegador: `http://localhost:8080/alunos`
 
----
-Desenvolvido por **Maurício Filho** - Professor de Guitarra e Desenvolvedor Java.
+### 3. Execução
+Execute o projeto via IntelliJ ou através do Maven no terminal:
+```bash
+  mvn spring-boot:run
+```  
+
+4. Acesso
+Após o projeto iniciar, acesse no navegador: http://localhost:8080/alunos
+
+Desenvolvido por Maurício Filho Professor de Guitarra e Estudante de Análise e Desenvolvimento de Sistemas.
