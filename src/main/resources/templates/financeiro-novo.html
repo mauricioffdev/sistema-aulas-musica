@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{cabecalho :: head-padrao}"></head>
+
+<body>
+<nav th:replace="~{cabecalho :: menu-navegacao}"></nav>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="card shadow">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">Registrar Pagamento</h4>
+                </div>
+                <div class="card-body">
+
+                    <form th:action="@{/financeiro/salvar}" th:object="${pagamento}" method="post">
+
+                        <input type="hidden" th:field="*{id}" th:if="${pagamento.id != null}" />
+
+                        <div class="mb-3">
+                            <label class="form-label">Selecione o Aluno</label>
+                            <select th:field="*{aluno}" class="form-select" required>
+                                <option value="">Buscar aluno...</option>
+                                <option th:each="aluno : ${alunos}"
+                                        th:value="${aluno.id}"
+                                        th:text="${aluno.nome}"></option>
+                            </select>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Data</label>
+                                <input type="date" th:field="*{data}" class="form-control" required />
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Valor (R$)</label>
+                                <input type="number" step="0.01" th:field="*{valor}" class="form-control" placeholder="0.00" required />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Método</label>
+                                <select th:field="*{metodo}" class="form-select">
+                                    <option value="PIX">PIX</option>
+                                    <option value="Dinheiro">Dinheiro</option>
+                                    <option value="Cartão">Cartão</option>
+                                    <option value="Transferência">Transferência</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">Status</label>
+                                <select th:field="*{status}" class="form-select">
+                                    <option value="PAGO">Pago</option>
+                                    <option value="PENDENTE">Pendente</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success btn-lg">Confirmar Pagamento</button>
+                            <a href="/financeiro" class="btn btn-outline-secondary">Cancelar</a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Lista de Aulas</title></head>
+<body>
+    <h1>Lista de Aulas</h1>
+    <a href="/aulas/nova">Nova Aula</a>
+    <ul>
+        <li th:each="aula : ${aulas}">
+            <span th:text="${aula.data}"></span> -
+            <span th:text="${aula.conteudo}"></span> 
+        </li>
+    </ul>
+</body>
+</html>

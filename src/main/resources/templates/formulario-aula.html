@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nova Aula</title>
+</head>
+<body>
+    <h1>Nova Aula</h1>
+    <form th:action="@{/aulas/salvar}" th:object="${aula}" method="post">
+        <label>Data: <input type="text" th:field="*{data}" /></label><br>
+        <label>Duração: <input type="text" th:field="*{duracao}" /></label><br>
+        <label>Conteúdo: <input type="text" th:field="*{conteudo}" /></label><br>
+        <button type="submit">Salvar</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{cabecalho :: head-padrao}"></head>
+
+<body>
+<nav th:replace="~{cabecalho :: menu-navegacao}"></nav>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8"> <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0" th:text="${aluno.id == null} ? 'Novo Aluno' : 'Editar Aluno'">Cadastro</h4>
+            </div>
+
+            <div class="card-body">
+                <form th:action="@{/alunos/salvar}" th:object="${aluno}" method="post">
+
+                    <input type="hidden" th:field="*{id}" th:if="${aluno.id != null}" />
+
+                    <div class="mb-3">
+                        <label class="form-label">Nome Completo</label>
+                        <input type="text" th:field="*{nome}" class="form-control" placeholder="Ex: João da Silva" />
+                        <small th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="text-danger"></small>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="text" th:field="*{email}" class="form-control" placeholder="joao@email.com" />
+                            <small th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></small>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Telefone</label>
+                            <input type="text" th:field="*{telefone}" class="form-control" placeholder="(11) 99999-9999" />
+                            <small th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}" class="text-danger"></small>
+                        </div>
+                    </div>
+
+                    <<div class="row">
+                    <div class="col-md-8 mb-3">
+                        <label class="form-label">Plano / Curso</label>
+                        <input type="text" th:field="*{plano}" class="form-control"
+                               placeholder="Ex: Guitarra Metal, Pacote Trimestral..." />
+                        <small th:if="${#fields.hasErrors('plano')}" th:errors="*{plano}" class="text-danger"></small>
+                    </div>
+
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">Dia Vencimento</label>
+                        <input type="number" th:field="*{diaVencimento}" class="form-control"
+                               placeholder="Dia (1-31)" min="1" max="31" />
+                        <small th:if="${#fields.hasErrors('diaVencimento')}" th:errors="*{diaVencimento}" class="text-danger"></small>
+                    </div>
+                </div>
+
+                    <hr>
+
+                    <button type="submit" class="btn btn-success">
+                        <i class="bi bi-check-circle"></i> Salvar
+                    </button>
+                    <a href="/alunos" class="btn btn-secondary">Cancelar</a>
+                </form>
+            </div>
+        </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

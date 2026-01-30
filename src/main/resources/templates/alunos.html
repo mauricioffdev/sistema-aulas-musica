@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{cabecalho :: head-padrao}"></head>
+
+<body>
+<nav th:replace="~{cabecalho :: menu-navegacao}"></nav>
+
+<div class="container"> <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Meus Alunos</h1>
+    <a href="/alunos/novo" class="btn btn-primary">
+        <i class="bi bi-person-plus-fill"></i> Novo Aluno
+    </a>
+</div>
+
+    <table class="table table-striped table-hover table-bordered align-middle">
+        <thead class="table-dark">
+        <tr>
+            <th>Nome</th>
+            <th class="text-center">Vencimento</th> <th>Email</th>
+            <th>Telefone</th>
+            <th class="text-center">Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="aluno : ${alunos}">
+
+            <td th:text="${aluno.nome}"></td>
+
+            <td class="text-center fw-bold text-primary">
+                <span th:text="${aluno.diaVencimento != null ? 'Dia ' + aluno.diaVencimento : '-'}"></span>
+            </td>
+
+            <td th:text="${aluno.email}"></td>
+
+            <td th:text="${aluno.telefone}"></td>
+
+            <td class="text-center">
+                <a th:href="@{/alunos/editar/{id}(id=${aluno.id})}" class="btn btn-sm btn-warning" title="Editar">
+                    <i class="bi bi-pencil"></i>
+                </a>
+
+                <a th:href="@{/alunos/excluir/{id}(id=${aluno.id})}"
+                   class="btn btn-sm btn-danger"
+                   onclick="return confirm('Tem certeza que deseja excluir este aluno?')"
+                   title="Excluir">
+                    <i class="bi bi-trash"></i>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div th:if="${#lists.isEmpty(alunos)}" class="alert alert-info text-center">
+        Nenhum aluno cadastrado ainda.
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

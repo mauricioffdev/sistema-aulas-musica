@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{cabecalho :: head-padrao}"></head>
+
+<body>
+<nav th:replace="~{cabecalho :: menu-navegacao}"></nav>
+
+<div class="container">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1><i class="bi bi-cash-coin"></i> Controle Financeiro</h1>
+        <div>
+            <a href="/alunos" class="btn btn-outline-secondary me-2">Ver Alunos</a>
+            <a href="/financeiro/novo" class="btn btn-success">
+                <i class="bi bi-plus-circle"></i> Novo Pagamento
+            </a>
+        </div>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+            <table class="table table-striped table-hover mb-0">
+                <thead class="table-dark">
+                <tr>
+                    <th>Aluno</th>
+                    <th>Data</th>
+                    <th>Valor</th>
+                    <th>Método</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="pagamento : ${pagamentos}">
+                    <td th:text="${pagamento.aluno.nome}" class="fw-bold"></td>
+                    <td th:text="${#temporals.format(pagamento.data, 'dd/MM/yyyy')}"></td>
+                    <td th:text="'R$ ' + ${pagamento.valor}"></td>
+                    <td>
+                        <span class="badge bg-secondary" th:text="${pagamento.metodo}"></span>
+                    </td>
+                    <td>
+                                <span class="badge"
+                                      th:classappend="${pagamento.status == 'PAGO'} ? 'text-bg-success' : 'text-bg-warning'"
+                                      th:text="${pagamento.status}">
+                                </span>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(pagamentos)}">
+                    <td colspan="5" class="text-center py-4 text-muted">
+                        Nenhum pagamento registrado ainda.
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
