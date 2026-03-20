@@ -27,7 +27,7 @@
                     <th>Valor</th>
                     <th>Método</th>
                     <th>Status</th>
-                </tr>
+                    <th>Ações</th> </tr>
                 </thead>
                 <tbody>
                 <tr th:each="pagamento : ${pagamentos}">
@@ -38,14 +38,26 @@
                         <span class="badge bg-secondary" th:text="${pagamento.metodo}"></span>
                     </td>
                     <td>
-                                <span class="badge"
-                                      th:classappend="${pagamento.status == 'PAGO'} ? 'text-bg-success' : 'text-bg-warning'"
-                                      th:text="${pagamento.status}">
-                                </span>
+            <span class="badge"
+                  th:classappend="${pagamento.status == 'PAGO'} ? 'text-bg-success' : 'text-bg-warning'"
+                  th:text="${pagamento.status}">
+            </span>
+                    </td>
+                    <td>
+                        <a th:href="@{/financeiro/editar/{id}(id=${pagamento.id})}"
+                           class="btn btn-sm btn-outline-primary me-2">
+                            <i class="bi bi-pencil"></i> Editar
+                        </a>
+                        <a th:href="@{/financeiro/deletar/{id}(id=${pagamento.id})}"
+                           class="btn btn-sm btn-outline-danger"
+                           onclick="return confirm('Tem certeza que deseja excluir este pagamento?')">
+                            <i class="bi bi-trash"></i> Excluir
+                        </a>
                     </td>
                 </tr>
+
                 <tr th:if="${#lists.isEmpty(pagamentos)}">
-                    <td colspan="5" class="text-center py-4 text-muted">
+                    <td colspan="6" class="text-center py-4 text-muted">
                         Nenhum pagamento registrado ainda.
                     </td>
                 </tr>

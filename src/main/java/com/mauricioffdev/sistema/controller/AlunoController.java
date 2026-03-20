@@ -1,12 +1,12 @@
 package com.mauricioffdev.sistema.controller;
 
-import jakarta.validation.Valid;
-import org.springframework.validation.BindingResult;
 import com.mauricioffdev.sistema.model.Aluno;
-import com.mauricioffdev.sistema.service.AlunoService; // Não esqueça de importar o Service!
+import com.mauricioffdev.sistema.service.AlunoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller; // Mudou de RestController para Controller
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +24,7 @@ public class AlunoController {
     @GetMapping("/api") // Mudei a rota para não conflitar
     @ResponseBody // Isso diz: "Não procure um HTML, retorne os dados puros"
     public List<Aluno> listarTodosAPI() {
-        return service.listarTodos(); // Use o método do seu Service
+        return service.listarTodos(); // Use o metodo do seu Service
     }
 
     @PostMapping("/api")
@@ -36,7 +36,7 @@ public class AlunoController {
     @DeleteMapping("/api/{id}")
     @ResponseBody
     public void deletarAPI(@PathVariable Long id) {
-        service.deletar(id); // Você precisa criar esse método 'deletar' no Service se não tiver
+        service.deletar(id); // Você precisa criar esse metodo 'deletar' no Service se não tiver
     }
 
     // --- MÉTODOS DE TELA (Retornam HTML/Thymeleaf) ---
